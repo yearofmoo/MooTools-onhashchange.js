@@ -1,0 +1,5 @@
+Mootools window.onhashchange event listener for all browsers
+
+-Uses the window.onhashchange native event for Firefox 3.6, IE8 and Chrome 5
+-Uses a timed interval for all other browsers
+-Frames are used for IE6 and IE7 to properly emulate the back and forward buttons
