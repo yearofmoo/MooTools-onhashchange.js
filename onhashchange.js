@@ -2,6 +2,7 @@
 
 	//set the events
 	window.store('hashchange:interval',300);
+	window.store('hashchange:ieframe-src','./blank.html');
 	window.store('hashchange:implemented',!!('onhashchange' in window));
 
 	Element.Events.hashchange = {
@@ -120,7 +121,7 @@
 				};
 
 				//create the frame
-				var src = './blank.html';
+				var src = window.retrieve('hashchange:ieframe-src');
 				var ieframe = new IFrame({
 					'id':'hashchange-ie-frame',
 					'src':src+'?start',
