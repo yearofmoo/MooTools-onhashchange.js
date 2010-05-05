@@ -1,4 +1,4 @@
-(function() {
+function() {
 
 	//set the events
 	window.store('hashchange:interval',300);
@@ -138,7 +138,6 @@
 						if(self.retrieve('loaded')) {
 							//examine the url
 							var url = unescape(new String(self.contentWindow.location));
-							alert(url);
 							var index = url.indexOf('?');
 							if(index>=0) {
 								var path = '', empty = false;
