@@ -230,7 +230,7 @@ function() {
 			window.sethash = function(hash) {
 				if(hash.charAt(0)!='#')
 				hash = '#' + hash;
-				window.hashcheck(hash);
+				checker(hash);
 			}
 		},
 
