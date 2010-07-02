@@ -1,4 +1,4 @@
-function() {
+(function() {
 
 	//set the events
 	window.store('hashchange:interval',300);
