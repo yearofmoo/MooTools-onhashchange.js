@@ -13,7 +13,7 @@
 			//check the element
 			var self = $(this);
 			var checker = $empty;
-			if(self != $(window)) {
+			if($type(self) != 'window') {
 				return; //the window object only supports this
 			}
 
@@ -151,7 +151,11 @@
 										path = '#' + path;
 									}
 								}
-								window.retrieve('hashchange:checker')(path,true);
+								
+								var current = window.retrieve('hashchange:current');
+								if(current != path) {
+									window.retrieve('hashchange:checker')(path,true);
+								}
 							}
 						}
 						else {
@@ -176,7 +180,7 @@
 					this.contentWindow.location = src + '?!' + escape(path);
 				}.bind(ieframe);
 			}
-			else if(window.retrieve('hashchange:implemented')) { //Firefox 3.6, Chrome 5, IE8 all support the event natively
+			else if(window.retrieve('hashchange:implemented')) { //Firefox 3.6, Chrome 5, IE8 and Safari 5 all support the event natively
 
 				//check the hashcheck
 				checker = window.onhashchange = function(hash) {
@@ -227,7 +231,7 @@
 			checker();
 
 			//setup a custom go event
-			window.sethash = function(hash) {
+			var sethash = function(hash) {
 				if(hash.charAt(0)!='#')
 				hash = '#' + hash;
 				if(Browser.Engine.trident4 || Browser.Engine.trident5) { //ie6 and ie7
@@ -245,6 +249,9 @@
 				  window.location.hash = hash;
 				}
 			}
+
+			//check ie browsers
+			window.sethash = sethash;
 		},
 
 		onDelete:function() {

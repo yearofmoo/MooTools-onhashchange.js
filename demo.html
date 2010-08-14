@@ -8,16 +8,15 @@ a { display:block; }
 <body>
 
 <h1 id="container"></h1>
-<a href="#test">test</a>
-<a href="#cool">cool</a>
-<a href="#">empty</a>
+<a href="#/one" id="one">one</a>
+<a href="#/two" id="two">two</a>
+<a href="#/three" id="three">three</a>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
 <script type="text/javascript" src="./onhashchange.js"></script>
 <script type="text/javascript">
 window.addEvent('hashchange',function(hash) {
-	hash = hash.length>0 ? hash : '[empty]';
-	$('container').set('html',hash);
+  alert(hash);
 });
 </script>
 </body>
