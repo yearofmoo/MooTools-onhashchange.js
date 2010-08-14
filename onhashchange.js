@@ -230,7 +230,20 @@
 			window.sethash = function(hash) {
 				if(hash.charAt(0)!='#')
 				hash = '#' + hash;
-				checker(hash);
+				if(Browser.Engine.trident4 || Browser.Engine.trident5) { //ie6 and ie7
+				  var url = new String(window.location);
+				  var current = url.match(/#.+?$/);
+				  current = current && current[0] ? current[0] : '';
+				  if(current.length>0) {
+				    window.location = url.replace(current,hash);
+				  }
+				  else {
+				    window.location += hash;
+				  }
+				}
+				else { //other, more advanced browsers
+				  window.location.hash = hash;
+				}
 			}
 		},
 
