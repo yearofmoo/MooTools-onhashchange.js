@@ -9,6 +9,9 @@
       $empty = Function.from;
       $clear = clearTimeout;
     }
+    if(!window.$type) {
+      $type = typeOf;
+    }
   }
   else if(Browser.Engine) {
     Browser.ie6 = Browser.Engine.trident4;
@@ -265,6 +268,11 @@ Element.Events.hashchange = {
             else { //other, more advanced browsers
               window.location.hash = hash;
             }
+
+            //check the hash right away
+            if(!window.retrieve('haschange:implemented')) {
+              checker();
+            }
           }
 
           //check ie browsers
@@ -272,7 +280,7 @@ Element.Events.hashchange = {
         },
 
   onDelete:function() {
-             if($(this) == $(window)) {
+             if($type(this) == 'window') {
                var timer = window.retrieve('hashchange:timer');
                if(timer) {
                  $clear(timer); timer = null;
