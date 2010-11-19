@@ -1,5 +1,22 @@
 (function($,$$) {
 
+  //setup the browser types
+  var mt13 = window.MooTools && window.MooTools.version == '1.3';
+
+  //check mootools 1.3
+  if(mt13) { 
+    if(!window.$empty) {//non compatibility mode
+      $empty = Function.from;
+      $clear = clearTimeout;
+    }
+  }
+  else if(Browser.Engine) {
+    Browser.ie6 = Browser.Engine.trident4;
+    Browser.ie7 = Browser.Engine.trident5;
+    Browser.opera = Browser.Engine.presto;
+  }
+
+
 	//set the events
 	window.store('hashchange:interval',300);
 	window.store('hashchange:ieframe-src','./blank.html');
@@ -47,7 +64,7 @@
 			}
 
 			//Oldschool IE browsers
-			if(Browser.Engine.trident4 || Browser.Engine.trident5) { 
+			if(Browser.ie6 || Browser.ie7) { 
 
 				//IE6 and IE7 require an empty frame to relay the change (back and forward buttons)
 				//custom IE method
@@ -195,7 +212,7 @@
 			}
 			else { //Others
 				//opera requires a history mode to be set so that #hash values are recorded in history (back and forward buttons)
-				if(Browser.Engine.presto) {
+				if(Browser.opera) {
 					history.navigationMode='compatible';
 				}
 
@@ -234,7 +251,7 @@
 			var sethash = function(hash) {
 				if(hash.charAt(0)!='#')
 				hash = '#' + hash;
-				if(Browser.Engine.trident4 || Browser.Engine.trident5) { //ie6 and ie7
+				if(Browser.ie6 || Browser.ie7) { //ie6 and ie7
 				  var url = new String(window.location);
 				  var current = url.match(/#.+?$/);
 				  current = current && current[0] ? current[0] : '';
