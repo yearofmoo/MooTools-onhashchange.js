@@ -271,7 +271,7 @@ Element.Events.hashchange = {
 
             //check the hash right away
             if(!window.retrieve('haschange:implemented')) {
-              checker();
+              window.retrieve('hashchange:checker')();
             }
           }
 
