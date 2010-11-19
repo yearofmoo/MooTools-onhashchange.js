@@ -1,5 +1,7 @@
 Mootools window.onhashchange event listener for all browsers.
 
+-Works in Mootools 1.2 and 1.3 (also works in Mootools 1.3 with 1.2 compatibility mode)
+
 -Uses the window.onhashchange native event for Firefox 3.6+, IE8+, Chrome 5+ and Safari 5+.
 -Uses a timed interval for all other browsers.
 -Frames are used for IE6 and IE7 to properly emulate the back and forward buttons.

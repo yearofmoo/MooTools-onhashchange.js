@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+a { display:block; }
+</style>
+</head>
+<body>
+
+<h1 id="container"></h1>
+<a href="#/one" id="one">one</a>
+<a href="#/two" id="two">two</a>
+<a href="#/three" id="three">three</a>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js"></script>
+<script type="text/javascript" src="./onhashchange.js"></script>
+<script type="text/javascript">
+window.addEvent('hashchange',function(hash) {
+  alert(hash);
+});
+</script>
+</body>
+</html>
