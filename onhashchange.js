@@ -19,7 +19,6 @@
     Browser.opera = Browser.Engine.presto;
   }
 
-
 //set the events
 window.store('hashchange:interval',300);
 window.store('hashchange:ieframe-src','./blank.html');
@@ -270,7 +269,7 @@ Element.Events.hashchange = {
             }
 
             //check the hash right away
-            if(!window.retrieve('haschange:implemented')) {
+            if(!window.retrieve('hashchange:implemented')) {
               window.retrieve('hashchange:checker')();
             }
           }
