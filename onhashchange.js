@@ -185,7 +185,7 @@ Element.Events.hashchange = {
 
             //save the frame
             window.store('hashchange:ieframe',ieframe);
-            ieframe.injectInside(document.body);
+            ieframe.inject(document.body,'inside');
 
             var doc = ieframe.contentWindow;
             ieframe.setPath = function(path) {
