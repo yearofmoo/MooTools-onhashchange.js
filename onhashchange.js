@@ -1,7 +1,7 @@
 (function($,$$) {
 
   //setup the browser types
-  var mt13 = window.MooTools && window.MooTools.version == '1.3';
+  var mt13 = window.MooTools && window.MooTools.version.test(/1\.3/);
 
   //check mootools 1.3
   if(mt13) { 
