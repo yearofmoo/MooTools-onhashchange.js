@@ -255,7 +255,7 @@ Element.Events.hashchange = {
               hash = '#' + hash;
             if(Browser.ie6 || Browser.ie7) { //ie6 and ie7
               var url = new String(window.location);
-              var current = url.match(/#.+?$/);
+              var current = url.match(/#.*?$/);
               current = current && current[0] ? current[0] : '';
               if(current.length>0) {
                 window.location = url.replace(current,hash);
