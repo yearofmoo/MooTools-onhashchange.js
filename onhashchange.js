@@ -1,24 +1,5 @@
 (function($,$$) {
 
-  //setup the browser types
-  var mt13 = window.MooTools && window.MooTools.version.test(/1\.3/);
-
-  //check mootools 1.3
-  if(mt13) { 
-    if(!window.$empty) {//non compatibility mode
-      $empty = Function.from;
-      $clear = clearTimeout;
-    }
-    if(!window.$type) {
-      $type = typeOf;
-    }
-  }
-  else if(Browser.Engine) {
-    Browser.ie6 = Browser.Engine.trident4;
-    Browser.ie7 = Browser.Engine.trident5;
-    Browser.opera = Browser.Engine.presto;
-  }
-
 //set the events
 window.store('hashchange:interval',300);
 window.store('hashchange:ieframe-src','./blank.html');
@@ -27,12 +8,12 @@ window.store('hashchange:implemented',!!('onhashchange' in window));
 Element.Events.hashchange = {
   onAdd:function(fn) {
           //clear the event
-          Element.Events.hashchange.onAdd = $empty;
+          Element.Events.hashchange.onAdd = Function.from;
 
           //check the element
           var self = $(this);
-          var checker = $empty;
-          if($type(self) != 'window') {
+          var checker = Function.from;
+          if(typeOf(self) != 'window') {
             return; //the window object only supports this
           }
 
@@ -75,7 +56,7 @@ Element.Events.hashchange = {
               //clear the timer
               var checker = window.retrieve('hashchange:checker');
               var timer = window.retrieve('hashchange:timer');
-              $clear(timer); //just incase
+              clearTimeout(timer); //just incase
               timer = null;
 
               //IE may give a hash value, a path value or a url
@@ -141,7 +122,7 @@ Element.Events.hashchange = {
 
             //create the frame
             var src = window.retrieve('hashchange:ieframe-src');
-            var ieframe = new IFrame({
+            var ieframe = new Element('iframe', {
               'id':'hashchange-ie-frame',
                 'src':src+'?start',
                 'styles':{
@@ -156,7 +137,7 @@ Element.Events.hashchange = {
                   var self = $('hashchange-ie-frame');
                   if(self.retrieve('loaded')) {
                     //examine the url
-                    var url = unescape(new String(self.contentWindow.location));
+                    var url = unescape(new String(ieframe.contentWindow.location));
                     var index = url.indexOf('?');
                     if(index>=0) {
                       var path = '', empty = false;
@@ -187,17 +168,16 @@ Element.Events.hashchange = {
             window.store('hashchange:ieframe',ieframe);
             ieframe.inject(document.body,'inside');
 
-            var doc = ieframe.contentWindow;
             ieframe.setPath = function(path) {
               if(path.charAt(0)=='#') {
                 path = path.substr(1);
                 if(path.length==0) {
-                  this.contentWindow.location = src + '?empty';
+                  ieframe.contentWindow.location = src + '?empty';
                   return;
                 }
               }
-              this.contentWindow.location = src + '?!' + escape(path);
-            }.bind(ieframe);
+              ieframe.contentWindow.location = src + '?!' + escape(path);
+            };
           }
           else if(window.retrieve('hashchange:implemented')) { //Firefox 3.6, Chrome 5, IE8 and Safari 5 all support the event natively
 
@@ -224,7 +204,7 @@ Element.Events.hashchange = {
               //clear the timer
               var checker = window.retrieve('hashchange:checker');
               var timer = window.retrieve('hashchange:timer');
-              $clear(timer); //just incase
+              clearTimeout(timer); //just incase
               timer = null;
 
               //compare the hash
@@ -279,10 +259,10 @@ Element.Events.hashchange = {
         },
 
   onDelete:function() {
-             if($type(this) == 'window') {
+             if(typeOf(this) == 'window') {
                var timer = window.retrieve('hashchange:timer');
                if(timer) {
-                 $clear(timer); timer = null;
+                 clearTimeout(timer); timer = null;
                  window.store('hashchange:timer',null);
                }
              }
