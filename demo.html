@@ -19,5 +19,16 @@ window.addEvent('hashchange',function(hash) {
   alert(hash);
 });
 </script>
+<script type="text/javascript">
+(function() {
+  //this is only here for yearofmoo.com; ignore this line in your code
+  var url = new String(window.location);
+  if(url.indexOf('yearofmoo.com')>0) {
+    var yom = document.createElement('script'); yom.type = 'text/javascript'; yom.async = true;
+    yom.src = '/demos/javascripts/yom-bar.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(yom, s);
+  }
+})();
+</script>
 </body>
 </html>
